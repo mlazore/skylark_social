@@ -60,29 +60,7 @@ class Home extends Component {
     this.setState({ showLoginComponent: true });
     console.log(this.state);
   };
-
-  handleLogin(event) {
-    event.preventDefault();
-    if (this.state.loginUser === "" || this.state.loginPassword === "") {
-      this.setState({ inputBlank: true });
-    } else {
-      axios
-        .get(`http://localhost:4000/api/user/${this.state.loginUser}/${this.state.loginPassword} `)
-        .then(response => {
-          this.setState({ incorrectLogin: false, inputBlank: false });
-          const user = {
-            id: response.data.id,
-            userName: response.data.user_name
-          };
-          this.useLocalStorage(JSON.stringify(user));
-        })
-        .catch(
-          function(error) {
-            this.setState({ incorrectLogin: true, inputBlank: false });
-          }.bind(this)
-        );
-    }
-  }
+  
 
   bypassLogin = (event) => {
     event.preventDefault();
